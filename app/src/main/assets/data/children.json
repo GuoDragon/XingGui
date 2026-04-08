@@ -1,0 +1,18 @@
+﻿[
+  {
+    "childId": "child001",
+    "name": "晨晨",
+    "age": 7,
+    "interventionDuration": "8个月",
+    "guardianIds": ["parent001"],
+    "assignedTeacherIds": ["teacher001"]
+  },
+  {
+    "childId": "child002",
+    "name": "朵朵",
+    "age": 6,
+    "interventionDuration": "5个月",
+    "guardianIds": ["parent002"],
+    "assignedTeacherIds": ["teacher001"]
+  }
+]

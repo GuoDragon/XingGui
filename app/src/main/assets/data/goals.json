@@ -1,0 +1,40 @@
+﻿[
+  {
+    "childId": "child001",
+    "semesterGoal": "改善课堂指令跟随，建立稳定轮流习惯。",
+    "monthlyGoal": "聚焦情绪标注与简短问答，每周完成 2 次引导练习。",
+    "weeklyCheckIns": [
+      {
+        "itemId": "c1_w1",
+        "title": "完成两次情绪卡片命名练习",
+        "completed": true,
+        "rewardStars": 3
+      },
+      {
+        "itemId": "c1_w2",
+        "title": "在教师提示下完成一次轮流游戏",
+        "completed": false,
+        "rewardStars": 2
+      }
+    ]
+  },
+  {
+    "childId": "child002",
+    "semesterGoal": "增强主动表达与分步骤自理完成度。",
+    "monthlyGoal": "练习表达需求、整理书包并完成晨检流程。",
+    "weeklyCheckIns": [
+      {
+        "itemId": "c2_w1",
+        "title": "使用完整句子提出喝水或上厕所需求",
+        "completed": true,
+        "rewardStars": 2
+      },
+      {
+        "itemId": "c2_w2",
+        "title": "独立检查一次书包物品",
+        "completed": true,
+        "rewardStars": 3
+      }
+    ]
+  }
+]

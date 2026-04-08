@@ -1,0 +1,34 @@
+﻿[
+  {
+    "resourceId": "res001",
+    "title": "家校周报模板",
+    "category": "资讯政策",
+    "isPaid": false,
+    "summary": "可复用的周结构模板，覆盖目标、完成记录与教师反馈。",
+    "recommendedReason": "适合作为报告与目标模块之间的衔接材料。"
+  },
+  {
+    "resourceId": "res002",
+    "title": "结构化课堂案例复盘",
+    "category": "典型案例",
+    "isPaid": false,
+    "summary": "围绕轮流训练与课堂常规支持的简短案例示例。",
+    "recommendedReason": "适合在教师侧推荐区域展示。"
+  },
+  {
+    "resourceId": "res003",
+    "title": "融合教育政策深读",
+    "category": "政策解读",
+    "isPaid": true,
+    "summary": "付费条目占位，用于验证解锁提示与付费标签。",
+    "recommendedReason": "用于资源模块中的付费内容分支验证。"
+  },
+  {
+    "resourceId": "res004",
+    "title": "教具制作指南",
+    "category": "教具指南",
+    "isPaid": false,
+    "summary": "家庭与课堂可复用的干预教具制作与使用说明。",
+    "recommendedReason": "适用于推荐卡片与分类列表两类场景。"
+  }
+]
