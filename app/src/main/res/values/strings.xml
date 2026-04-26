@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">星轨</string>
+    <string name="shell_title">星轨</string>
+    <string name="login_title">欢迎使用星轨</string>
+    <string name="login_subtitle">输入账号或邮箱后连接本地服务，按数据库中的真实角色进入应用。</string>
+    <string name="register_title">创建账号</string>
+    <string name="register_subtitle">注册信息将直接写入本地 API + MySQL，并同步创建你的移动端角色。</string>
+    <string name="role_select_title">选择角色</string>
+    <string name="role_select_subtitle">这里展示的是当前账号在数据库中实际拥有的移动端角色。</string>
+    <string name="role_select_empty">当前账号没有可用的移动端角色。</string>
+    <string name="label_name">姓名</string>
+    <string name="label_email">邮箱</string>
+    <string name="label_account">账号 / 邮箱</string>
+    <string name="label_username">账号</string>
+    <string name="label_password">密码</string>
+    <string name="label_confirm_password">确认密码</string>
+    <string name="label_register_roles">注册角色</string>
+    <string name="action_login">进入应用</string>
+    <string name="action_register">前往注册</string>
+    <string name="action_create_account">完成注册</string>
+    <string name="action_back_to_login">返回登录</string>
+    <string name="action_continue">继续</string>
+    <string name="action_retry">重试</string>
+    <string name="action_select_child">切换儿童</string>
+    <string name="role_parent">我是家长</string>
+    <string name="role_teacher">我是教师</string>
+    <string name="role_parent_desc">查看数据库中归属于你的儿童档案与家庭协同任务。</string>
+    <string name="role_teacher_desc">查看数据库中分配给你的儿童名单与教学支持内容。</string>
+    <string name="tab_report">报告</string>
+    <string name="tab_archive">档案</string>
+    <string name="tab_goals">目标</string>
+    <string name="tab_resources">资源</string>
+    <string name="tab_profile">我的</string>
+    <string name="loading">加载中...</string>
+    <string name="empty_state">暂无内容</string>
+    <string name="error_state">加载失败</string>
+    <string name="label_current_child">当前儿童</string>
+    <string name="label_current_role">当前角色</string>
+    <string name="placeholder_search">搜索资源、政策或案例</string>
+    <string name="placeholder_upload">上传入口占位，后续用于文档导入与数字化录入。</string>
+    <string name="label_paid">付费</string>
+    <string name="label_parent_view">家长视角</string>
+    <string name="label_teacher_view">教师视角</string>
+</resources>

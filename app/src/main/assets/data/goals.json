@@ -1,0 +1,142 @@
+﻿[
+  {
+    "childId": "child001",
+    "semesterGoal": "改善课堂指令跟随，建立稳定轮流习惯。",
+    "monthlyGoal": "聚焦情绪标注与简短问答，每周完成 2 次引导练习。",
+    "weeklyCheckIns": [
+      {
+        "itemId": "c1_w1",
+        "dimensionId": "cognition",
+        "title": "完成两次卡片命名练习",
+        "completed": false,
+        "rewardStars": 1
+      },
+      {
+        "itemId": "c1_w2",
+        "dimensionId": "communication",
+        "title": "完成短语接话游戏",
+        "completed": false,
+        "rewardStars": 2
+      },
+      {
+        "itemId": "c1_w3",
+        "dimensionId": "action",
+        "title": "连续抛接球10次",
+        "completed": false,
+        "rewardStars": 2
+      },
+      {
+        "itemId": "c1_w4",
+        "dimensionId": "relationship",
+        "title": "在教师提示下完成一次轮流游戏",
+        "completed": false,
+        "rewardStars": 2
+      },
+      {
+        "itemId": "c1_w5",
+        "dimensionId": "emotion",
+        "title": "能用表情卡片指认开心和难过",
+        "completed": true,
+        "rewardStars": 3
+      },
+      {
+        "itemId": "c1_w6",
+        "dimensionId": "sensory",
+        "title": "分辨不同的水果味道",
+        "completed": false,
+        "rewardStars": 1
+      },
+      {
+        "itemId": "c1_w7",
+        "dimensionId": "health",
+        "title": "今天没有挑食",
+        "completed": false,
+        "rewardStars": 2
+      },
+      {
+        "itemId": "c1_w8",
+        "dimensionId": "self_care",
+        "title": "独立洗手",
+        "completed": false,
+        "rewardStars": 2
+      },
+      {
+        "itemId": "c1_w9",
+        "dimensionId": "academic",
+        "title": "听见下课铃自己整理书包",
+        "completed": false,
+        "rewardStars": 1
+      }
+    ]
+  },
+  {
+    "childId": "child002",
+    "semesterGoal": "增强主动表达与分步骤自理完成度。",
+    "monthlyGoal": "练习表达需求、整理书包并完成晨检流程。",
+    "weeklyCheckIns": [
+      {
+        "itemId": "c2_w1",
+        "dimensionId": "cognition",
+        "title": "指认三种常见交通工具",
+        "completed": false,
+        "rewardStars": 1
+      },
+      {
+        "itemId": "c2_w2",
+        "dimensionId": "communication",
+        "title": "使用完整句子提出喝水或上厕所需求",
+        "completed": true,
+        "rewardStars": 2
+      },
+      {
+        "itemId": "c2_w3",
+        "dimensionId": "action",
+        "title": "单脚站立五秒",
+        "completed": false,
+        "rewardStars": 1
+      },
+      {
+        "itemId": "c2_w4",
+        "dimensionId": "relationship",
+        "title": "主动向同伴分享玩具",
+        "completed": false,
+        "rewardStars": 3
+      },
+      {
+        "itemId": "c2_w5",
+        "dimensionId": "emotion",
+        "title": "生气时能用语言表达而不尖叫",
+        "completed": false,
+        "rewardStars": 3
+      },
+      {
+        "itemId": "c2_w6",
+        "dimensionId": "sensory",
+        "title": "配对颜色相同的积木",
+        "completed": true,
+        "rewardStars": 2
+      },
+      {
+        "itemId": "c2_w7",
+        "dimensionId": "health",
+        "title": "饭后自己漱口",
+        "completed": false,
+        "rewardStars": 2
+      },
+      {
+        "itemId": "c2_w8",
+        "dimensionId": "self_care",
+        "title": "独立检查一次书包物品",
+        "completed": true,
+        "rewardStars": 3
+      },
+      {
+        "itemId": "c2_w9",
+        "dimensionId": "academic",
+        "title": "适应新的排队规则",
+        "completed": false,
+        "rewardStars": 2
+      }
+    ]
+  }
+]

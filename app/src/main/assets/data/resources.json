@@ -1,0 +1,242 @@
+[
+  {
+    "resourceId": "res001",
+    "title": "融合教育政策要点解读",
+    "category": "资讯政策",
+    "isPaid": false,
+    "summary": "融合教育的核心理念、政策框架和实施要点，帮助教师和家长理解融合教育的本质。",
+    "recommendedReason": "政策解读",
+    "assetPath": "resources/pdfs/res001_inclusive_education_guide.pdf",
+    "sourceUrl": null
+  },
+  {
+    "resourceId": "res002",
+    "title": "个别化教育计划（IEP）编写指南",
+    "category": "资讯政策",
+    "isPaid": false,
+    "summary": "IEP 编写的标准流程、目标设定方法和评估工具，附实际案例参考。",
+    "recommendedReason": "实用工具",
+    "assetPath": "resources/pdfs/res002_iep_writing_guide.pdf",
+    "sourceUrl": null
+  },
+  {
+    "resourceId": "res003",
+    "title": "自闭症儿童教育支持策略",
+    "category": "政策解读",
+    "isPaid": true,
+    "summary": "基于循证实践的自闭症儿童教育支持方法，包括课堂适应和行为管理策略。",
+    "recommendedReason": "专业指导",
+    "assetPath": "resources/pdfs/res003_autism_support_strategies.pdf",
+    "sourceUrl": null
+  },
+  {
+    "resourceId": "res004",
+    "title": "感觉统合训练活动手册",
+    "category": "教具指南",
+    "isPaid": false,
+    "summary": "家庭和课堂可用的感统训练活动设计，包含材料准备和实施步骤。",
+    "recommendedReason": "动手实践",
+    "assetPath": "resources/pdfs/res004_sensory_integration_activities.pdf",
+    "sourceUrl": null
+  },
+  {
+    "resourceId": "res005",
+    "title": "特殊儿童语言发展训练方案",
+    "category": "典型案例",
+    "isPaid": false,
+    "summary": "针对语言发展迟缓儿童的系统训练方案，包含评估工具和训练活动。",
+    "recommendedReason": "案例参考",
+    "assetPath": "resources/pdfs/res005_language_development.pdf",
+    "sourceUrl": null
+  },
+  {
+    "resourceId": "res006",
+    "title": "注意力缺陷多动障碍（ADHD）课堂管理",
+    "category": "典型案例",
+    "isPaid": false,
+    "summary": "ADHD 儿童的课堂行为管理策略和环境调整建议。",
+    "recommendedReason": "行为管理",
+    "assetPath": "resources/pdfs/res006_adhd_classroom_management.pdf",
+    "sourceUrl": null
+  },
+  {
+    "resourceId": "res007",
+    "title": "视觉支持工具制作与应用",
+    "category": "教具指南",
+    "isPaid": false,
+    "summary": "视觉时间表、社交故事和提示卡的制作方法与使用技巧。",
+    "recommendedReason": "实用工具",
+    "assetPath": "resources/pdfs/res007_visual_supports.pdf",
+    "sourceUrl": null
+  },
+  {
+    "resourceId": "res008",
+    "title": "家长培训手册：早期干预的重要性",
+    "category": "资讯政策",
+    "isPaid": false,
+    "summary": "帮助家长理解早期干预的价值，掌握家庭训练的基本方法。",
+    "recommendedReason": "家长指导",
+    "assetPath": "resources/pdfs/res008_parent_training.pdf",
+    "sourceUrl": null
+  },
+  {
+    "resourceId": "res009",
+    "title": "社交技能训练课程设计",
+    "category": "典型案例",
+    "isPaid": true,
+    "summary": "结构化的社交技能训练课程，包含角色扮演和情境练习。",
+    "recommendedReason": "课程设计",
+    "assetPath": "resources/pdfs/res009_social_skills_training.pdf",
+    "sourceUrl": null
+  },
+  {
+    "resourceId": "res010",
+    "title": "辅助沟通系统（AAC）应用指南",
+    "category": "教具指南",
+    "isPaid": true,
+    "summary": "图片交换沟通系统（PECS）和辅助沟通设备的选择与使用。",
+    "recommendedReason": "沟通支持",
+    "assetPath": "resources/pdfs/res010_aac_guide.pdf",
+    "sourceUrl": null
+  },
+  {
+    "resourceId": "res011",
+    "title": "特殊教育评估工具使用手册",
+    "category": "政策解读",
+    "isPaid": false,
+    "summary": "常用特殊教育评估工具的介绍、使用方法和结果解读。",
+    "recommendedReason": "评估工具",
+    "assetPath": "resources/pdfs/res011_assessment_tools.pdf",
+    "sourceUrl": null
+  },
+  {
+    "resourceId": "res012",
+    "title": "融合课堂教学策略与调整",
+    "category": "典型案例",
+    "isPaid": false,
+    "summary": "融合课堂中的差异化教学策略和课程调整方法。",
+    "recommendedReason": "教学策略",
+    "assetPath": "resources/pdfs/res012_inclusive_teaching.pdf",
+    "sourceUrl": null
+  },
+  {
+    "resourceId": "res101",
+    "title": "CDC 发展里程碑检查表（2个月）",
+    "category": "资讯政策",
+    "isPaid": false,
+    "summary": "美国疾控中心官方发布的 2 个月婴儿发展里程碑评估工具。",
+    "recommendedReason": "早期筛查",
+    "assetPath": "resources/pdfs/res101_cdc_2_months_checklist.pdf",
+    "sourceUrl": "https://www.cdc.gov/act-early/media/pdfs/2025/05/Eng.-2-months-Milestone-Moments-Checklist-2021-P.pdf"
+  },
+  {
+    "resourceId": "res102",
+    "title": "CDC 发展里程碑检查表（4个月）",
+    "category": "资讯政策",
+    "isPaid": false,
+    "summary": "美国疾控中心官方发布的 4 个月婴儿发展里程碑评估工具。",
+    "recommendedReason": "发展追踪",
+    "assetPath": "resources/pdfs/res102_cdc_4_months_checklist.pdf",
+    "sourceUrl": "https://www.cdc.gov/act-early/media/pdfs/2025/05/Eng.-4-months-Milestone-Moments-Checklist-2021-P.pdf"
+  },
+  {
+    "resourceId": "res103",
+    "title": "CDC 发展里程碑检查表（6个月）",
+    "category": "资讯政策",
+    "isPaid": true,
+    "summary": "美国疾控中心官方发布的 6 个月婴儿发展里程碑评估工具。",
+    "recommendedReason": "档案记录",
+    "assetPath": "resources/pdfs/res103_cdc_6_months_checklist.pdf",
+    "sourceUrl": "https://www.cdc.gov/act-early/media/pdfs/2025/05/Eng.-6-months-Milestone-Moments-Checklist-2021-P_1.pdf"
+  },
+  {
+    "resourceId": "res104",
+    "title": "CDC 发展里程碑检查表（9个月）",
+    "category": "典型案例",
+    "isPaid": false,
+    "summary": "美国疾控中心官方发布的 9 个月婴儿发展里程碑评估工具。",
+    "recommendedReason": "案例参考",
+    "assetPath": "resources/pdfs/res104_cdc_9_months_checklist.pdf",
+    "sourceUrl": "https://www.cdc.gov/act-early/media/pdfs/2025/05/Eng.-9-months-Milestone-Moments-Checklist-2021-P.pdf"
+  },
+  {
+    "resourceId": "res105",
+    "title": "CDC 发展里程碑检查表（12个月）",
+    "category": "典型案例",
+    "isPaid": false,
+    "summary": "美国疾控中心官方发布的 12 个月婴儿发展里程碑评估工具。",
+    "recommendedReason": "一岁评估",
+    "assetPath": "resources/pdfs/res105_cdc_12_months_checklist.pdf",
+    "sourceUrl": "https://www.cdc.gov/act-early/media/pdfs/2025/05/Eng.-12-months-Milestone-Moments-Checklist-2021-P.pdf"
+  },
+  {
+    "resourceId": "res106",
+    "title": "CDC 发展里程碑检查表（15个月）",
+    "category": "典型案例",
+    "isPaid": true,
+    "summary": "美国疾控中心官方发布的 15 个月幼儿发展里程碑评估工具。",
+    "recommendedReason": "干预评估",
+    "assetPath": "resources/pdfs/res106_cdc_15_months_checklist.pdf",
+    "sourceUrl": "https://www.cdc.gov/act-early/media/pdfs/2025/05/Eng.-15-mo.-Milestone-Moments-Checklist-2021-P.pdf"
+  },
+  {
+    "resourceId": "res107",
+    "title": "CDC 发展里程碑检查表（18个月）",
+    "category": "政策解读",
+    "isPaid": false,
+    "summary": "美国疾控中心官方发布的 18 个月幼儿发展里程碑评估工具。",
+    "recommendedReason": "筛查工具",
+    "assetPath": "resources/pdfs/res107_cdc_18_months_checklist.pdf",
+    "sourceUrl": "https://www.cdc.gov/act-early/media/pdfs/2025/05/Eng.-18-mo-Milestone-Moments-Checklist-2021-P.pdf"
+  },
+  {
+    "resourceId": "res108",
+    "title": "CDC 发展里程碑检查表（2岁）",
+    "category": "政策解读",
+    "isPaid": true,
+    "summary": "美国疾控中心官方发布的 2 岁幼儿发展里程碑评估工具。",
+    "recommendedReason": "标准对照",
+    "assetPath": "resources/pdfs/res108_cdc_2_years_checklist.pdf",
+    "sourceUrl": "https://www.cdc.gov/act-early/media/pdfs/2025/05/Eng.-2-yrs-Milestone-Moments-Checklist-2021-P.pdf"
+  },
+  {
+    "resourceId": "res109",
+    "title": "CDC 发展里程碑检查表（30个月）",
+    "category": "政策解读",
+    "isPaid": false,
+    "summary": "美国疾控中心官方发布的 30 个月幼儿发展里程碑评估工具。",
+    "recommendedReason": "过渡评估",
+    "assetPath": "resources/pdfs/res109_cdc_30_months_checklist.pdf",
+    "sourceUrl": "https://www.cdc.gov/act-early/media/pdfs/2025/05/Eng.-30-mo.-Milestone-Moments-Checklist-2021-P.pdf"
+  },
+  {
+    "resourceId": "res110",
+    "title": "CDC 发展里程碑检查表（3岁）",
+    "category": "教具指南",
+    "isPaid": false,
+    "summary": "美国疾控中心官方发布的 3 岁儿童发展里程碑评估工具。",
+    "recommendedReason": "学前准备",
+    "assetPath": "resources/pdfs/res110_cdc_3_years_checklist.pdf",
+    "sourceUrl": "https://www.cdc.gov/act-early/media/pdfs/2025/05/Eng.-3-yrs-Milestone-Moments-Checklist-2021-P.pdf"
+  },
+  {
+    "resourceId": "res111",
+    "title": "CDC 发展里程碑检查表（4岁）",
+    "category": "教具指南",
+    "isPaid": true,
+    "summary": "美国疾控中心官方发布的 4 岁儿童发展里程碑评估工具。",
+    "recommendedReason": "能力评估",
+    "assetPath": "resources/pdfs/res111_cdc_4_years_checklist.pdf",
+    "sourceUrl": "https://www.cdc.gov/act-early/media/pdfs/2025/05/Eng.-4-yrs-Milestone-Moments-Checklist-2021-P.pdf"
+  },
+  {
+    "resourceId": "res112",
+    "title": "CDC 发展里程碑检查表（5岁）",
+    "category": "教具指南",
+    "isPaid": false,
+    "summary": "美国疾控中心官方发布的 5 岁儿童发展里程碑评估工具。",
+    "recommendedReason": "入学准备",
+    "assetPath": "resources/pdfs/res112_cdc_5_years_checklist.pdf",
+    "sourceUrl": "https://www.cdc.gov/act-early/media/pdfs/2025/05/Eng.-5-yrs-Milestone-Moments-Checklist-2021-P.pdf"
+  }
+]

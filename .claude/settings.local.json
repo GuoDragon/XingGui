@@ -1,0 +1,34 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(netstat -ano)",
+      "Bash(tasklist)",
+      "Bash(curl -s http://localhost:8080/auth/me)",
+      "Bash(findstr \"8080\")",
+      "Bash(findstr -i mysql)",
+      "Bash(./gradlew.bat :backend:run *)",
+      "Bash(mysql *)",
+      "Bash(./gradlew.bat :app:compileDebugKotlin)",
+      "Bash(grep -E \"\\\\.kt$\")",
+      "Bash(curl -L -o res101_cdc_2_months_checklist.pdf \"https://www.cdc.gov/act-early/media/pdfs/2025/05/Eng.-2-months-Milestone-Moments-Checklist-2021-P.pdf\")",
+      "Bash(curl -L -o res102_cdc_4_months_checklist.pdf \"https://www.cdc.gov/act-early/media/pdfs/2025/05/Eng.-4-months-Milestone-Moments-Checklist-2021-P.pdf\")",
+      "Bash(curl -L -o res001_inclusive_education_guide.pdf \"https://www.unicef.org/sites/default/files/2019-11/UNICEF-Inclusive-Education-Guide.pdf\")",
+      "Bash(curl -L -o res002_iep_writing_guide.pdf \"https://www.parentcenterhub.org/wp-content/uploads/repo_items/legacy/nichcy/iep.pdf\")",
+      "Bash(curl -L -o res003_autism_support_strategies.pdf \"https://www.autismspeaks.org/sites/default/files/2018-08/Visual%20Supports%20Tool%20Kit.pdf\")",
+      "Bash(python ../../../../../../../create_sample_pdfs.py)",
+      "Bash(python *)",
+      "Bash(pip install *)",
+      "Bash(cp res101_cdc_2_months_checklist.pdf res001_inclusive_education_guide.pdf)",
+      "Bash(cp res102_cdc_4_months_checklist.pdf res002_iep_writing_guide.pdf)",
+      "Bash(cp res103_cdc_6_months_checklist.pdf res003_autism_support_strategies.pdf)",
+      "Bash(cp res104_cdc_9_months_checklist.pdf res004_sensory_integration_activities.pdf)",
+      "Read(//d/d/AndroidStudio/app/android_template/XingGui/app/src/main/assets/resources/**)",
+      "Bash(cp res101_cdc_2_months_checklist.pdf res005_language_development.pdf)",
+      "Bash(cp res102_cdc_4_months_checklist.pdf res006_adhd_classroom_management.pdf)",
+      "Bash(cp res103_cdc_6_months_checklist.pdf res007_visual_supports.pdf)",
+      "Bash(cp res104_cdc_9_months_checklist.pdf res008_parent_training.pdf)",
+      "Bash(cp res105_cdc_12_months_checklist.pdf res009_social_skills_training.pdf)",
+      "Bash(D:/Anaconda/python.exe *)"
+    ]
+  }
+}

@@ -1,0 +1,46 @@
+﻿[
+  {
+    "childId": "child001",
+    "overview": "沟通与情绪管理持续改善，结构化日常更易接受。",
+    "overallEvaluation": "儿童总体进步稳定，对结构化提示与家校协作反馈良好。",
+    "nextSuggestions": "继续强化生活自理和动作任务，并把课堂任务延伸到家庭练习。",
+    "aiAnalysis": "智能总结显示，情绪标注、指令跟随和同伴注意力均呈积极提升。",
+    "dimensionScores": {
+      "cognition": 72,
+      "communication": 78,
+      "action": 64,
+      "relationship": 60,
+      "emotion": 75,
+      "sensory": 68,
+      "health": 70,
+      "self_care": 59,
+      "academic": 66
+    },
+    "dimensionHighlights": [
+      "本月沟通维度提升最明显。",
+      "自理仍需家庭日常与可视化奖励反馈的持续支持。"
+    ]
+  },
+  {
+    "childId": "child002",
+    "overview": "自理与主动表达保持稳定，课堂参与度继续提升。",
+    "overallEvaluation": "当前干预节奏适合微目标训练与教师反馈闭环。",
+    "nextSuggestions": "将学业与关系任务拆分为更小的周目标，提升完成信心。",
+    "aiAnalysis": "智能总结显示，日常场景中的提示依赖降低，主动需求表达增多。",
+    "dimensionScores": {
+      "cognition": 69,
+      "communication": 74,
+      "action": 71,
+      "relationship": 62,
+      "emotion": 67,
+      "sensory": 65,
+      "health": 73,
+      "self_care": 79,
+      "academic": 61
+    },
+    "dimensionHighlights": [
+      "本周期自理维度表现最突出。",
+      "学业能力仍需更细颗粒任务与教师跟进。"
+    ]
+  }
+]
