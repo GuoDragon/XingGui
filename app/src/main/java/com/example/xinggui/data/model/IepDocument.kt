@@ -17,7 +17,9 @@ data class IepDocument(
     val monthlyGoal: String,
     val weeklyGoals: List<IepWeeklyGoalInput> = emptyList(),
     val notes: String? = null,
-    val uploadedAt: Long
+    val uploadedAt: Long,
+    val safetyStatus: String = "PASSED_BY_RULES",
+    val contentSafetyStatus: String = "PASSED_BY_RULES"
 )
 
 data class IepUploadResult(

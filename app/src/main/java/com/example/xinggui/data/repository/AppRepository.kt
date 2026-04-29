@@ -1,6 +1,7 @@
 package com.example.xinggui.data.repository
 
 import com.example.xinggui.data.model.CheckInProcessResult
+import com.example.xinggui.data.model.CaptchaChallenge
 import com.example.xinggui.data.model.ChildProfile
 import com.example.xinggui.data.model.GoalPlan
 import com.example.xinggui.data.model.IepDocument
@@ -19,15 +20,31 @@ interface AppRepository {
     suspend fun restoreSession(): SessionState
     suspend fun login(account: String, password: String): SessionState
     suspend fun logout(): SessionState
+    suspend fun logoutAllDevices(): SessionState
+    suspend fun requestRegistrationCaptcha(): CaptchaChallenge
     suspend fun register(
         username: String,
         name: String,
         email: String,
         password: String,
-        roles: List<UserRole>
+        roles: List<UserRole>,
+        captchaId: String? = null,
+        captchaAnswer: String? = null
     ): SessionState
     suspend fun updateRole(role: UserRole): SessionState
     suspend fun updateSelectedChild(childId: String): SessionState
+    suspend fun updateCurrentUserProfile(
+        displayName: String,
+        email: String?,
+        avatarKey: String?
+    ): SessionState
+    suspend fun updateChildProfile(
+        childId: String,
+        name: String,
+        birthDate: String?,
+        interventionStartDate: String?,
+        avatarKey: String?
+    ): ChildProfile
     suspend fun getChildById(childId: String): ChildProfile?
     suspend fun getChildrenForActiveRole(): List<ChildProfile>
     suspend fun getGoalPlan(childId: String): GoalPlan?

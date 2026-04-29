@@ -81,7 +81,9 @@ fun ReportReferencePage(
             ChildInfoProfileCard(
                 childName = state.childName,
                 age = state.age,
-                interventionDuration = state.interventionDuration
+                interventionDuration = state.interventionDuration,
+                birthDate = state.childBirthDate,
+                avatarKey = state.childAvatarKey
             )
         }
         item {
@@ -254,27 +256,6 @@ private fun ReportRadarCard(
                         .aspectRatio(1f),
                     contentAlignment = Alignment.Center
                 ) {
-                    Image(
-                        painter = painterResource(id = ReportReferenceAssets.chartHorizontalAxis),
-                        contentDescription = null,
-                        modifier = Modifier.fillMaxWidth(0.98f),
-                        contentScale = ContentScale.FillBounds,
-                        alpha = 0.9f
-                    )
-                    Image(
-                        painter = painterResource(id = ReportReferenceAssets.chartDiagonalAxisOne),
-                        contentDescription = null,
-                        modifier = Modifier.fillMaxWidth(0.64f),
-                        contentScale = ContentScale.FillBounds,
-                        alpha = 0.9f
-                    )
-                    Image(
-                        painter = painterResource(id = ReportReferenceAssets.chartDiagonalAxisTwo),
-                        contentDescription = null,
-                        modifier = Modifier.fillMaxWidth(0.64f),
-                        contentScale = ContentScale.FillBounds,
-                        alpha = 0.9f
-                    )
                     Image(
                         painter = painterResource(id = ReportReferenceAssets.chartCenterStar),
                         contentDescription = null,
@@ -464,9 +445,6 @@ private object ReportReferenceAssets {
     val titleStarIcon = R.drawable.report_ref_2edfaab6685ff323b516eab190bc9064
     val shareEntryIcon = R.drawable.report_ref_46b85f0ee5b4af4b7f9e4dc4f3251dae
     val chartBackgroundStars = R.drawable.report_ref_627fbc53da0bdbaef5d7f34fdb6c2306
-    val chartHorizontalAxis = R.drawable.report_ref_a15966d9465d2f9cc50ed87560544688
-    val chartDiagonalAxisOne = R.drawable.report_ref_a10f8a5d9c024fa74b16e9c533b1da06
-    val chartDiagonalAxisTwo = R.drawable.report_ref_ae13f1eaf2ce4704f9bc66292e7378d2
     val chartCenterStar = R.drawable.report_ref_fa1c28fc3cd1b5cb9e69c151db162473
     val chartTitleStar = R.drawable.report_ref_bdda76f4f9cc64478b98b84e891c3eac
 }

@@ -3,6 +3,7 @@ package com.example.xinggui.data.repository
 import android.content.Context
 import com.example.xinggui.common.constants.AppConstants
 import com.example.xinggui.data.model.AppConfig
+import com.example.xinggui.data.model.CaptchaChallenge
 import com.example.xinggui.data.model.CheckInProcessResult
 import com.example.xinggui.data.model.ChildProfile
 import com.example.xinggui.data.model.GoalPlan
@@ -75,7 +76,7 @@ object DataRepository : AppRepository {
         val payload = request<ApiSessionPayload>(
             method = "POST",
             path = "/auth/login",
-            body = LoginRequestBody(account = account, password = password),
+            body = LoginRequestBody(account = account, password = password, deviceId = installationDeviceId()),
             authToken = null
         )
         return consumeSessionPayload(payload)
@@ -83,8 +84,37 @@ object DataRepository : AppRepository {
 
     override suspend fun logout(): SessionState {
         ensureInitialized()
+        runCatching {
+            request<Map<String, Boolean>>(
+                method = "POST",
+                path = "/auth/logout",
+                body = null,
+                authToken = sessionState.authToken
+            )
+        }
         clearSession()
         return sessionState
+    }
+
+    override suspend fun logoutAllDevices(): SessionState {
+        ensureInitialized()
+        request<Map<String, Boolean>>(
+            method = "POST",
+            path = "/auth/logout-all",
+            body = null,
+            authToken = requireToken()
+        )
+        clearSession()
+        return sessionState
+    }
+
+    override suspend fun requestRegistrationCaptcha(): CaptchaChallenge {
+        ensureInitialized()
+        return request(
+            method = "GET",
+            path = "/security/captcha",
+            authToken = null
+        )
     }
 
     override suspend fun register(
@@ -92,7 +122,9 @@ object DataRepository : AppRepository {
         name: String,
         email: String,
         password: String,
-        roles: List<UserRole>
+        roles: List<UserRole>,
+        captchaId: String?,
+        captchaAnswer: String?
     ): SessionState {
         ensureInitialized()
         val payload = request<ApiSessionPayload>(
@@ -103,7 +135,10 @@ object DataRepository : AppRepository {
                 name = name,
                 email = email.ifBlank { null },
                 password = password,
-                roles = roles.map { it.storageValue }
+                roles = roles.map { it.storageValue },
+                captchaId = captchaId,
+                captchaAnswer = captchaAnswer,
+                deviceId = installationDeviceId()
             ),
             authToken = null
         )
@@ -130,6 +165,46 @@ object DataRepository : AppRepository {
             authToken = requireToken()
         )
         return consumeSessionPayload(payload)
+    }
+
+    override suspend fun updateCurrentUserProfile(
+        displayName: String,
+        email: String?,
+        avatarKey: String?
+    ): SessionState {
+        ensureInitialized()
+        val payload = request<ApiSessionPayload>(
+            method = "PUT",
+            path = "/users/me/profile",
+            body = UserProfileUpdateRequestBody(
+                displayName = displayName,
+                email = email?.takeIf { it.isNotBlank() },
+                avatarKey = avatarKey?.takeIf { it.isNotBlank() }
+            ),
+            authToken = requireToken()
+        )
+        return consumeSessionPayload(payload)
+    }
+
+    override suspend fun updateChildProfile(
+        childId: String,
+        name: String,
+        birthDate: String?,
+        interventionStartDate: String?,
+        avatarKey: String?
+    ): ChildProfile {
+        ensureInitialized()
+        return request(
+            method = "PUT",
+            path = "/children/$childId/profile",
+            body = ChildProfileUpdateRequestBody(
+                name = name,
+                birthDate = birthDate?.takeIf { it.isNotBlank() },
+                interventionStartDate = interventionStartDate?.takeIf { it.isNotBlank() },
+                avatarKey = avatarKey?.takeIf { it.isNotBlank() }
+            ),
+            authToken = requireToken()
+        )
     }
 
     override suspend fun getChildById(childId: String): ChildProfile? {
@@ -314,6 +389,7 @@ object DataRepository : AppRepository {
                 connectTimeout = 10_000
                 readTimeout = 20_000
                 setRequestProperty("Accept", "application/json")
+                setRequestProperty("X-Device-Id", installationDeviceId())
                 if (!authToken.isNullOrBlank()) {
                     setRequestProperty("Authorization", "Bearer $authToken")
                 }
@@ -376,6 +452,7 @@ object DataRepository : AppRepository {
                 doOutput = true
                 setRequestProperty("Accept", "application/json")
                 setRequestProperty("Authorization", "Bearer $authToken")
+                setRequestProperty("X-Device-Id", installationDeviceId())
                 setRequestProperty("Content-Type", "multipart/form-data; boundary=$boundary")
                 outputStream.use { output ->
                     fields.forEach { (name, value) ->
@@ -431,7 +508,9 @@ object DataRepository : AppRepository {
             authToken = payload.token,
             currentUserId = payload.user.userId,
             username = payload.user.username,
-            displayName = payload.user.name,
+            displayName = payload.user.displayName ?: payload.user.name,
+            email = payload.user.email,
+            avatarKey = payload.user.avatarKey,
             availableRoles = mappedRoles,
             activeRole = mapRole(payload.activeRole),
             selectedChildId = payload.selectedChildId,
@@ -454,7 +533,19 @@ object DataRepository : AppRepository {
     }
 
     private fun connectivityMessage(): String {
-        return "无法连接本地服务，请确认后端已启动：${appConfig.backendBaseUrl}"
+        return "无法连接本地服务，请确认后端已启动：${appConfig.backendBaseUrl}。可在项目根目录运行 启动后端.bat 后重试。"
+    }
+
+    private fun installationDeviceId(): String {
+        val file = File(appContext.filesDir, "device_id.txt")
+        val existing = file.takeIf { it.exists() }?.readText(Charsets.UTF_8)?.trim()
+        if (!existing.isNullOrBlank()) {
+            return existing
+        }
+        val created = "android-${UUID.randomUUID()}"
+        file.parentFile?.mkdirs()
+        file.writeText(created, Charsets.UTF_8)
+        return created
     }
 
     private fun readResponseText(connection: HttpURLConnection, statusCode: Int): String {
@@ -523,12 +614,16 @@ private data class ApiSessionPayload(
 private data class ApiUserPayload(
     val userId: String,
     val username: String,
-    val name: String
+    val name: String? = null,
+    val displayName: String? = null,
+    val email: String? = null,
+    val avatarKey: String? = null
 )
 
 private data class LoginRequestBody(
     val account: String,
-    val password: String
+    val password: String,
+    val deviceId: String? = null
 )
 
 private data class RegisterRequestBody(
@@ -536,7 +631,10 @@ private data class RegisterRequestBody(
     val name: String,
     val email: String? = null,
     val password: String,
-    val roles: List<String>
+    val roles: List<String>,
+    val captchaId: String? = null,
+    val captchaAnswer: String? = null,
+    val deviceId: String? = null
 )
 
 private data class ActiveRoleRequestBody(
@@ -545,6 +643,19 @@ private data class ActiveRoleRequestBody(
 
 private data class SelectedChildRequestBody(
     val childId: String
+)
+
+private data class UserProfileUpdateRequestBody(
+    val displayName: String,
+    val email: String? = null,
+    val avatarKey: String? = null
+)
+
+private data class ChildProfileUpdateRequestBody(
+    val name: String,
+    val birthDate: String? = null,
+    val interventionStartDate: String? = null,
+    val avatarKey: String? = null
 )
 
 private data class ArchiveCheckInRequestBody(

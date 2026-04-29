@@ -27,6 +27,7 @@ import kotlinx.coroutines.launch
 fun ArchiveScreen(
     selectedChildId: String,
     currentRole: UserRole,
+    childProfileRefreshKey: String? = null,
     modifier: Modifier = Modifier,
     repository: AppRepository = DataRepository,
     presenterFactory: (AppRepository) -> ArchiveContract.Presenter = { ArchivePresenter(it) }
@@ -58,7 +59,9 @@ fun ArchiveScreen(
     }
 
     LaunchedEffect(Unit) { presenter.attachView(view) }
-    LaunchedEffect(selectedChildId, currentRole) { presenter.loadData(selectedChildId, currentRole) }
+    LaunchedEffect(selectedChildId, currentRole, childProfileRefreshKey) {
+        presenter.loadData(selectedChildId, currentRole)
+    }
     DisposableEffect(Unit) { onDispose { presenter.detachView() } }
 
     IosStateView(

@@ -1,6 +1,7 @@
 package com.example.xinggui.presentation.goals
 
 import com.example.xinggui.data.model.CheckInProcessResult
+import com.example.xinggui.data.model.CaptchaChallenge
 import com.example.xinggui.data.model.ChildProfile
 import com.example.xinggui.data.model.GoalPlan
 import com.example.xinggui.data.model.IepDocument
@@ -143,17 +144,44 @@ class GoalsPresenterTest {
 
         override suspend fun logout(): SessionState = SessionState()
 
+        override suspend fun logoutAllDevices(): SessionState = SessionState()
+
+        override suspend fun requestRegistrationCaptcha(): CaptchaChallenge {
+            return CaptchaChallenge("captcha", "1 + 1 = ?", 0L)
+        }
+
         override suspend fun register(
             username: String,
             name: String,
             email: String,
             password: String,
-            roles: List<UserRole>
+            roles: List<UserRole>,
+            captchaId: String?,
+            captchaAnswer: String?
         ): SessionState = SessionState()
 
         override suspend fun updateRole(role: UserRole): SessionState = SessionState(activeRole = role)
 
         override suspend fun updateSelectedChild(childId: String): SessionState = SessionState(selectedChildId = childId)
+
+        override suspend fun updateCurrentUserProfile(
+            displayName: String,
+            email: String?,
+            avatarKey: String?
+        ): SessionState = SessionState(displayName = displayName, email = email, avatarKey = avatarKey)
+
+        override suspend fun updateChildProfile(
+            childId: String,
+            name: String,
+            birthDate: String?,
+            interventionStartDate: String?,
+            avatarKey: String?
+        ): ChildProfile = child.copy(
+            name = name,
+            birthDate = birthDate,
+            interventionStartDate = interventionStartDate,
+            avatarKey = avatarKey
+        )
 
         override suspend fun getChildById(childId: String): ChildProfile? = child.takeIf { it.childId == childId }
 

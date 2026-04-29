@@ -8,6 +8,8 @@ data class MainShellUiState(
     val currentUserName: String,
     val username: String?,
     val currentUserId: String?,
+    val currentUserEmail: String?,
+    val currentUserAvatarKey: String?,
     val currentRole: UserRole,
     val availableRoles: List<UserRole>,
     val currentChild: ChildProfile?,
@@ -27,6 +29,7 @@ interface MainContract {
 
         fun showShell(state: MainShellUiState)
         fun showError(message: String)
+        fun showMessage(message: String) = Unit
         fun navigateToLogin()
     }
 
@@ -35,6 +38,15 @@ interface MainContract {
         fun detachView()
         suspend fun loadShell()
         suspend fun onChildSelected(childId: String)
+        suspend fun onAccountProfileSaved(displayName: String, email: String?, avatarKey: String?): Boolean
+        suspend fun onChildProfileSaved(
+            childId: String,
+            name: String,
+            birthDate: String?,
+            interventionStartDate: String?,
+            avatarKey: String?
+        ): Boolean
         suspend fun onLogoutClicked()
+        suspend fun onLogoutAllDevicesClicked()
     }
 }

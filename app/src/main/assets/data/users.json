@@ -1,23 +1,33 @@
-﻿[
+[
   {
     "userId": "parent001",
     "name": "晨晨妈妈",
     "role": "PARENT",
     "email": "parent001@xinggui.local",
-    "childIds": ["child001"]
+    "childIds": [
+      "child001"
+    ],
+    "avatarKey": "user_sun"
   },
   {
     "userId": "teacher001",
     "name": "林老师",
     "role": "TEACHER",
     "email": "teacher001@xinggui.local",
-    "childIds": ["child001", "child002"]
+    "childIds": [
+      "child001",
+      "child002"
+    ],
+    "avatarKey": "user_leaf"
   },
   {
     "userId": "parent002",
     "name": "朵朵爸爸",
     "role": "PARENT",
     "email": "parent002@xinggui.local",
-    "childIds": ["child002"]
+    "childIds": [
+      "child002"
+    ],
+    "avatarKey": "user_berry"
   }
 ]

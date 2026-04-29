@@ -28,6 +28,7 @@ import kotlinx.coroutines.launch
 fun ReportScreen(
     selectedChildId: String,
     currentRole: UserRole,
+    childProfileRefreshKey: String? = null,
     modifier: Modifier = Modifier,
     repository: AppRepository = DataRepository,
     presenterFactory: (AppRepository) -> ReportContract.Presenter = { ReportPresenter(it) }
@@ -50,7 +51,9 @@ fun ReportScreen(
     }
 
     LaunchedEffect(Unit) { presenter.attachView(view) }
-    LaunchedEffect(selectedChildId, currentRole) { presenter.loadData(selectedChildId, currentRole) }
+    LaunchedEffect(selectedChildId, currentRole, childProfileRefreshKey) {
+        presenter.loadData(selectedChildId, currentRole)
+    }
     DisposableEffect(Unit) { onDispose { presenter.detachView() } }
 
     IosStateView(

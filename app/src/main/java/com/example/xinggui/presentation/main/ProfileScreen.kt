@@ -1,6 +1,7 @@
 package com.example.xinggui.presentation.main
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -18,7 +19,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.ChildCare
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.KeyboardArrowRight
+import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Logout
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -32,11 +35,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.example.xinggui.data.model.UserRole
+import com.example.xinggui.data.model.displayAge
+import com.example.xinggui.data.model.displayInterventionDuration
+import com.example.xinggui.presentation.common.AvatarPresets
 import com.example.xinggui.presentation.common.ChildInfoProfileCard
 import com.example.xinggui.ui.theme.IosBlueSoft
 import com.example.xinggui.ui.theme.IosGroupedBackground
@@ -57,6 +65,10 @@ private val ProfileDanger = IosRed
 @Composable
 fun ProfileScreen(
     state: MainShellUiState,
+    onEditAccountClick: () -> Unit,
+    onEditChildClick: () -> Unit,
+    onPrivacyClick: () -> Unit,
+    onLogoutAllDevicesClick: () -> Unit,
     onLogoutClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -83,7 +95,18 @@ fun ProfileScreen(
             CurrentChildSection(state = state)
         }
         item {
-            AccountActionGroup(onLogoutClick = onLogoutClick)
+            ProfileEditActionGroup(
+                canEditChild = state.currentRole == UserRole.PARENT && state.currentChild != null,
+                onEditAccountClick = onEditAccountClick,
+                onEditChildClick = onEditChildClick,
+                onPrivacyClick = onPrivacyClick
+            )
+        }
+        item {
+            AccountActionGroup(
+                onLogoutAllDevicesClick = onLogoutAllDevicesClick,
+                onLogoutClick = onLogoutClick
+            )
         }
     }
 }
@@ -115,11 +138,11 @@ private fun AccountSummaryCard(state: MainShellUiState) {
                         .background(ProfileAccentTint),
                     contentAlignment = Alignment.Center
                 ) {
-                    Icon(
-                        imageVector = Icons.Default.AccountCircle,
+                    Image(
+                        painter = painterResource(id = AvatarPresets.userDrawableRes(state.currentUserAvatarKey)),
                         contentDescription = null,
-                        modifier = Modifier.size(42.dp),
-                        tint = StarBlue
+                        modifier = Modifier.fillMaxSize(),
+                        contentScale = ContentScale.Crop
                     )
                 }
                 Column(
@@ -163,6 +186,8 @@ private fun AccountSummaryCard(state: MainShellUiState) {
                 ProfileValueRow(label = "当前身份", value = state.currentRole.displayName, valueColor = StarBlue)
                 ProfileDivider()
                 ProfileValueRow(label = "可用身份", value = state.availableRoleLabel())
+                ProfileDivider()
+                ProfileValueRow(label = "邮箱", value = state.currentUserEmail.displayOrPlaceholder())
                 state.currentUserId?.takeIf { it.isNotBlank() }?.let { userId ->
                     ProfileDivider()
                     ProfileValueRow(label = "用户 ID", value = userId)
@@ -201,18 +226,69 @@ private fun CurrentChildSection(state: MainShellUiState) {
         } else {
             ChildInfoProfileCard(
                 childName = child.name,
-                age = child.age,
-                interventionDuration = child.interventionDuration
+                age = child.displayAge(),
+                interventionDuration = child.displayInterventionDuration(),
+                birthDate = child.birthDate,
+                avatarKey = child.avatarKey
             )
         }
     }
 }
 
 @Composable
-private fun AccountActionGroup(onLogoutClick: () -> Unit) {
+private fun ProfileEditActionGroup(
+    canEditChild: Boolean,
+    onEditAccountClick: () -> Unit,
+    onEditChildClick: () -> Unit,
+    onPrivacyClick: () -> Unit
+) {
+    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        SectionHeader(title = "资料设置")
+        SettingsGroupCard {
+            SettingsActionRow(
+                icon = Icons.Default.AccountCircle,
+                iconTint = StarBlue,
+                title = "编辑账号资料",
+                subtitle = "修改显示名、邮箱和预设头像",
+                onClick = onEditAccountClick
+            )
+            ProfileDivider()
+            SettingsActionRow(
+                icon = Icons.Default.ChildCare,
+                iconTint = Color(0xFF3BA272),
+                title = "编辑当前孩子资料",
+                subtitle = if (canEditChild) "修改姓名、日期和预设头像" else "仅家长可编辑孩子资料",
+                enabled = canEditChild,
+                onClick = onEditChildClick
+            )
+            ProfileDivider()
+            SettingsActionRow(
+                icon = Icons.Default.Info,
+                iconTint = Color(0xFF7A6A42),
+                title = "隐私与数据说明",
+                subtitle = "儿童档案、成长报告与 IEP 文档的使用范围",
+                onClick = onPrivacyClick
+            )
+        }
+    }
+}
+
+@Composable
+private fun AccountActionGroup(
+    onLogoutAllDevicesClick: () -> Unit,
+    onLogoutClick: () -> Unit
+) {
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
         SectionHeader(title = "账号操作")
         SettingsGroupCard {
+            SettingsActionRow(
+                icon = Icons.Default.Lock,
+                iconTint = Color(0xFFB7791F),
+                title = "退出全部设备",
+                subtitle = "撤销当前账号所有未过期会话",
+                onClick = onLogoutAllDevicesClick
+            )
+            ProfileDivider()
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -249,6 +325,62 @@ private fun AccountActionGroup(onLogoutClick: () -> Unit) {
                 )
             }
         }
+    }
+}
+
+@Composable
+private fun SettingsActionRow(
+    icon: androidx.compose.ui.graphics.vector.ImageVector,
+    iconTint: Color,
+    title: String,
+    subtitle: String,
+    enabled: Boolean = true,
+    onClick: () -> Unit
+) {
+    val rowAlpha = if (enabled) 1f else 0.46f
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable(enabled = enabled, onClick = onClick)
+            .padding(horizontal = 16.dp, vertical = 14.dp),
+        horizontalArrangement = Arrangement.spacedBy(12.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Box(
+            modifier = Modifier
+                .size(36.dp)
+                .clip(CircleShape)
+                .background(iconTint.copy(alpha = 0.10f)),
+            contentAlignment = Alignment.Center
+        ) {
+            Icon(
+                imageVector = icon,
+                contentDescription = null,
+                modifier = Modifier.size(20.dp),
+                tint = iconTint.copy(alpha = rowAlpha)
+            )
+        }
+        Column(
+            modifier = Modifier.weight(1f),
+            verticalArrangement = Arrangement.spacedBy(2.dp)
+        ) {
+            Text(
+                text = title,
+                style = MaterialTheme.typography.bodyLarge,
+                color = StarTextPrimary.copy(alpha = rowAlpha),
+                fontWeight = FontWeight.SemiBold
+            )
+            Text(
+                text = subtitle,
+                style = MaterialTheme.typography.bodySmall,
+                color = StarTextSecondary.copy(alpha = rowAlpha)
+            )
+        }
+        Icon(
+            imageVector = Icons.Default.KeyboardArrowRight,
+            contentDescription = null,
+            tint = Color(0xFFB4BFCC).copy(alpha = rowAlpha)
+        )
     }
 }
 

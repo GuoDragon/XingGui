@@ -6,5 +6,6 @@ data class AppUser(
     val name: String,
     val roles: List<UserRole>,
     val email: String? = null,
+    val avatarKey: String? = null,
     val childIds: List<String> = emptyList()
 )

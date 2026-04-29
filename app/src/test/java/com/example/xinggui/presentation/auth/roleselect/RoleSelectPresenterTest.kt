@@ -1,6 +1,7 @@
 ﻿package com.example.xinggui.presentation.auth.roleselect
 
 import com.example.xinggui.data.model.CheckInProcessResult
+import com.example.xinggui.data.model.CaptchaChallenge
 import com.example.xinggui.data.model.ChildProfile
 import com.example.xinggui.data.model.GoalPlan
 import com.example.xinggui.data.model.IepDocument
@@ -96,12 +97,23 @@ class RoleSelectPresenterTest {
             return session
         }
 
+        override suspend fun logoutAllDevices(): SessionState {
+            session = SessionState()
+            return session
+        }
+
+        override suspend fun requestRegistrationCaptcha(): CaptchaChallenge {
+            return CaptchaChallenge("captcha", "1 + 1 = ?", 0L)
+        }
+
         override suspend fun register(
             username: String,
             name: String,
             email: String,
             password: String,
-            roles: List<UserRole>
+            roles: List<UserRole>,
+            captchaId: String?,
+            captchaAnswer: String?
         ): SessionState = session
 
         override suspend fun updateRole(role: UserRole): SessionState {
@@ -113,6 +125,31 @@ class RoleSelectPresenterTest {
             session = session.copy(selectedChildId = childId)
             return session
         }
+
+        override suspend fun updateCurrentUserProfile(
+            displayName: String,
+            email: String?,
+            avatarKey: String?
+        ): SessionState {
+            session = session.copy(displayName = displayName, email = email, avatarKey = avatarKey)
+            return session
+        }
+
+        override suspend fun updateChildProfile(
+            childId: String,
+            name: String,
+            birthDate: String?,
+            interventionStartDate: String?,
+            avatarKey: String?
+        ): ChildProfile = ChildProfile(
+            childId = childId,
+            name = name,
+            age = 0,
+            interventionDuration = "",
+            birthDate = birthDate,
+            interventionStartDate = interventionStartDate,
+            avatarKey = avatarKey
+        )
 
         override suspend fun getChildById(childId: String): ChildProfile? = null
 

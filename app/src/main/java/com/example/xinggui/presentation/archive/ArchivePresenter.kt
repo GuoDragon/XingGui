@@ -2,6 +2,8 @@
 
 import com.example.xinggui.data.model.GrowthDimension
 import com.example.xinggui.data.model.UserRole
+import com.example.xinggui.data.model.displayAge
+import com.example.xinggui.data.model.displayInterventionDuration
 import com.example.xinggui.data.repository.AppRepository
 import com.example.xinggui.presentation.common.ScreenRenderState
 
@@ -61,8 +63,10 @@ class ArchivePresenter(
                 }
                 ArchiveUiState(
                     childName = child.name,
-                    childAge = child.age,
-                    childInterventionDuration = child.interventionDuration,
+                    childAge = child.displayAge(),
+                    childInterventionDuration = child.displayInterventionDuration(),
+                    childBirthDate = child.birthDate,
+                    childAvatarKey = child.avatarKey,
                     role = role,
                     semesterGoal = goal.semesterGoal,
                     monthlyGoal = goal.monthlyGoal,

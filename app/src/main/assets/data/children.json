@@ -1,18 +1,32 @@
-﻿[
+[
   {
     "childId": "child001",
     "name": "晨晨",
     "age": 7,
     "interventionDuration": "8个月",
-    "guardianIds": ["parent001"],
-    "assignedTeacherIds": ["teacher001"]
+    "guardianIds": [
+      "parent001"
+    ],
+    "assignedTeacherIds": [
+      "teacher001"
+    ],
+    "birthDate": "2018-09-01",
+    "interventionStartDate": "2025-08-26",
+    "avatarKey": "child_sky"
   },
   {
     "childId": "child002",
     "name": "朵朵",
     "age": 6,
     "interventionDuration": "5个月",
-    "guardianIds": ["parent002"],
-    "assignedTeacherIds": ["teacher001"]
+    "guardianIds": [
+      "parent002"
+    ],
+    "assignedTeacherIds": [
+      "teacher001"
+    ],
+    "birthDate": "2019-11-15",
+    "interventionStartDate": "2025-11-26",
+    "avatarKey": "child_peach"
   }
 ]

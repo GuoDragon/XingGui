@@ -21,6 +21,8 @@ import androidx.compose.ui.unit.dp
 import com.example.xinggui.R
 import com.example.xinggui.data.model.ChildProfile
 import com.example.xinggui.data.model.UserRole
+import com.example.xinggui.data.model.displayAge
+import com.example.xinggui.data.model.displayInterventionDuration
 
 @Composable
 fun ChildSelectorBar(
@@ -61,7 +63,7 @@ fun ChildSelectorBar(
                     ) {
                         children.forEach { child ->
                             DropdownMenuItem(
-                                text = { Text(text = "${child.name} · ${child.age}岁") },
+                                text = { Text(text = "${child.name} · ${child.displayAge()}岁") },
                                 onClick = {
                                     expanded = false
                                     onChildSelected(child.childId)
@@ -72,11 +74,11 @@ fun ChildSelectorBar(
                 }
             }
             Text(
-                text = "${currentChild.age}岁",
+                text = "${currentChild.displayAge()}岁",
                 style = MaterialTheme.typography.bodyMedium
             )
             Text(
-                text = "干预时长 ${currentChild.interventionDuration}",
+                text = "干预时长 ${currentChild.displayInterventionDuration()}",
                 style = MaterialTheme.typography.bodyMedium
             )
         }

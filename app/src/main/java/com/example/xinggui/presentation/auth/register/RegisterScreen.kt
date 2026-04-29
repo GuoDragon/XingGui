@@ -26,9 +26,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import com.example.xinggui.R
+import com.example.xinggui.data.model.CaptchaChallenge
 import com.example.xinggui.data.model.UserRole
 import com.example.xinggui.data.repository.AppRepository
 import com.example.xinggui.data.repository.DataRepository
+import com.example.xinggui.presentation.common.PrivacyNoticeDialog
 import com.example.xinggui.ui.components.DecorativeStarsOverlay
 import com.example.xinggui.ui.components.IosGroupCard
 import com.example.xinggui.ui.components.IosPrimaryButton
@@ -54,9 +56,12 @@ fun RegisterScreen(
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var confirmPassword by remember { mutableStateOf("") }
+    var captchaChallenge by remember { mutableStateOf<CaptchaChallenge?>(null) }
+    var captchaAnswer by remember { mutableStateOf("") }
     val selectedRoles = remember { mutableStateListOf<UserRole>() }
     var errorMessage by remember { mutableStateOf<String?>(null) }
     var isSubmitting by remember { mutableStateOf(false) }
+    var showPrivacy by remember { mutableStateOf(false) }
     val view = remember {
         object : RegisterContract.View {
             override fun showSubmitting(submitting: Boolean) {
@@ -65,6 +70,12 @@ fun RegisterScreen(
 
             override fun showError(message: String) {
                 errorMessage = message
+            }
+
+            override fun showCaptchaChallenge(challenge: CaptchaChallenge, message: String?) {
+                captchaChallenge = challenge
+                captchaAnswer = ""
+                errorMessage = message ?: "请先完成验证码后继续注册"
             }
 
             override fun navigateToRoleSelect() {
@@ -143,6 +154,32 @@ fun RegisterScreen(
                             enabled = !isSubmitting
                         )
                     }
+                    captchaChallenge?.let { challenge ->
+                        IosGroupCard(
+                            modifier = Modifier.fillMaxWidth(),
+                            title = "安全验证",
+                            subtitle = "请回答：${challenge.question}"
+                        ) {
+                            Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                                IosTextField(
+                                    value = captchaAnswer,
+                                    onValueChange = {
+                                        captchaAnswer = it
+                                        errorMessage = null
+                                    },
+                                    label = "验证码答案",
+                                    enabled = !isSubmitting
+                                )
+                                IosTextButton(
+                                    text = "换一道题",
+                                    onClick = {
+                                        scope.launch { presenter.onRefreshCaptchaClicked() }
+                                    },
+                                    enabled = !isSubmitting
+                                )
+                            }
+                        }
+                    }
                     errorMessage?.let {
                         Text(
                             text = it,
@@ -161,7 +198,8 @@ fun RegisterScreen(
                                     email = email,
                                     password = password,
                                     confirmPassword = confirmPassword,
-                                    roles = selectedRoles.toList()
+                                    roles = selectedRoles.toList(),
+                                    captchaAnswer = captchaAnswer
                                 )
                             }
                         },
@@ -173,6 +211,11 @@ fun RegisterScreen(
                         onClick = onBackClick,
                         enabled = !isSubmitting
                     )
+                    IosTextButton(
+                        text = "隐私与儿童数据说明",
+                        onClick = { showPrivacy = true },
+                        enabled = !isSubmitting
+                    )
                 }
             }
         }
@@ -181,6 +224,9 @@ fun RegisterScreen(
             modifier = Modifier.fillMaxSize(),
             pageKey = "register_screen"
         )
+        if (showPrivacy) {
+            PrivacyNoticeDialog(onDismiss = { showPrivacy = false })
+        }
     }
 }
 

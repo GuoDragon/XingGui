@@ -1,16 +1,23 @@
 @echo off
 chcp 65001 >nul
+setlocal
+
+if "%XINGGUI_MODE%"=="" set XINGGUI_MODE=local-demo
+
 echo ========================================
-echo 星轨后端服务启动脚本
+echo XingGui backend local demo launcher
 echo ========================================
+echo Backend URL : http://127.0.0.1:8080
+echo Android URL : http://10.0.2.2:8080
+echo Database    : 127.0.0.1:3306/xinggui
+echo DB user     : %XINGGUI_DB_USER%  (empty means root)
+echo Mode        : %XINGGUI_MODE%
+echo Stop        : Press Ctrl+C in this window
 echo.
-echo 正在启动后端服务...
-echo 端口: 8080
-echo 数据库: xinggui
-echo.
-echo 请保持此窗口打开，不要关闭！
-echo 按 Ctrl+C 可以停止后端服务
+echo Tip: Gradle showing "83%% EXECUTING" means the backend is running.
 echo ========================================
 echo.
 
-gradlew.bat :backend:run
+call gradlew.bat :backend:run
+
+endlocal

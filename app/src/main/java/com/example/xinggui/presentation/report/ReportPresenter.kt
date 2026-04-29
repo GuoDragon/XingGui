@@ -2,6 +2,8 @@
 
 import com.example.xinggui.data.model.GrowthDimension
 import com.example.xinggui.data.model.UserRole
+import com.example.xinggui.data.model.displayAge
+import com.example.xinggui.data.model.displayInterventionDuration
 import com.example.xinggui.data.repository.AppRepository
 import com.example.xinggui.presentation.common.ScreenRenderState
 import java.text.SimpleDateFormat
@@ -51,8 +53,10 @@ class ReportPresenter(
                 }
                 ReportUiState(
                     childName = child.name,
-                    age = child.age,
-                    interventionDuration = child.interventionDuration,
+                    age = child.displayAge(),
+                    interventionDuration = child.displayInterventionDuration(),
+                    childBirthDate = child.birthDate,
+                    childAvatarKey = child.avatarKey,
                     role = role,
                     dimensions = dimensions,
                     overview = report.overview,

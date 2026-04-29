@@ -37,6 +37,8 @@ class MainPresenter(
                     ?: "未命名账号",
                 username = session.username,
                 currentUserId = session.currentUserId,
+                currentUserEmail = session.email,
+                currentUserAvatarKey = session.avatarKey,
                 currentRole = role,
                 availableRoles = session.availableRoles.ifEmpty { listOf(role) },
                 currentChild = selectedChild,
@@ -58,6 +60,51 @@ class MainPresenter(
         loadShell()
     }
 
+    override suspend fun onAccountProfileSaved(
+        displayName: String,
+        email: String?,
+        avatarKey: String?
+    ): Boolean {
+        return runCatching {
+            require(displayName.isNotBlank()) { "请填写显示名" }
+            repository.updateCurrentUserProfile(
+                displayName = displayName.trim(),
+                email = email?.trim()?.takeIf { it.isNotBlank() },
+                avatarKey = avatarKey
+            )
+        }.onSuccess {
+            loadShell()
+            view?.showMessage("账号资料已更新")
+        }.onFailure { error ->
+            view?.showMessage(error.message ?: "账号资料保存失败")
+        }.isSuccess
+    }
+
+    override suspend fun onChildProfileSaved(
+        childId: String,
+        name: String,
+        birthDate: String?,
+        interventionStartDate: String?,
+        avatarKey: String?
+    ): Boolean {
+        return runCatching {
+            require(childId.isNotBlank()) { "缺少儿童 ID" }
+            require(name.isNotBlank()) { "请填写儿童姓名" }
+            repository.updateChildProfile(
+                childId = childId,
+                name = name.trim(),
+                birthDate = birthDate?.trim()?.takeIf { it.isNotBlank() },
+                interventionStartDate = interventionStartDate?.trim()?.takeIf { it.isNotBlank() },
+                avatarKey = avatarKey
+            )
+        }.onSuccess {
+            loadShell()
+            view?.showMessage("儿童资料已更新")
+        }.onFailure { error ->
+            view?.showMessage(error.message ?: "儿童资料保存失败")
+        }.isSuccess
+    }
+
     override suspend fun onLogoutClicked() {
         runCatching {
             repository.logout()
@@ -65,6 +112,16 @@ class MainPresenter(
             view?.navigateToLogin()
         }.onFailure { error ->
             view?.showError(error.message ?: "退出账号失败")
+        }
+    }
+
+    override suspend fun onLogoutAllDevicesClicked() {
+        runCatching {
+            repository.logoutAllDevices()
+        }.onSuccess {
+            view?.navigateToLogin()
+        }.onFailure { error ->
+            view?.showError(error.message ?: "退出全部设备失败")
         }
     }
 }

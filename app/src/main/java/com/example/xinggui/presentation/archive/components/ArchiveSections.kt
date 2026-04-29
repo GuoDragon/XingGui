@@ -73,7 +73,9 @@ fun ArchiveReferencePage(
             ChildInfoProfileCard(
                 childName = state.childName,
                 age = state.childAge,
-                interventionDuration = state.childInterventionDuration
+                interventionDuration = state.childInterventionDuration,
+                birthDate = state.childBirthDate,
+                avatarKey = state.childAvatarKey
             )
         }
         item {

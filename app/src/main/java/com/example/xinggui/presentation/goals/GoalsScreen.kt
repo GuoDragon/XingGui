@@ -98,6 +98,7 @@ private val IepMimeTypes = arrayOf(
 fun GoalsScreen(
     selectedChildId: String,
     currentRole: UserRole,
+    childProfileRefreshKey: String? = null,
     modifier: Modifier = Modifier,
     repository: AppRepository = DataRepository,
     presenterFactory: (AppRepository) -> GoalsContract.Presenter = { GoalsPresenter(it) }
@@ -148,7 +149,9 @@ fun GoalsScreen(
     }
 
     LaunchedEffect(Unit) { presenter.attachView(view) }
-    LaunchedEffect(selectedChildId, currentRole) { presenter.loadData(selectedChildId, currentRole) }
+    LaunchedEffect(selectedChildId, currentRole, childProfileRefreshKey) {
+        presenter.loadData(selectedChildId, currentRole)
+    }
     DisposableEffect(Unit) { onDispose { presenter.detachView() } }
 
     IosStateView(

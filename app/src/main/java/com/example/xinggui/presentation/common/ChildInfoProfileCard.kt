@@ -35,13 +35,16 @@ fun ChildInfoProfileCard(
     childName: String,
     age: Int,
     interventionDuration: String,
+    birthDate: String? = null,
+    avatarKey: String? = null,
     modifier: Modifier = Modifier
 ) {
-    val profileInfo = remember(childName, age, interventionDuration) {
+    val profileInfo = remember(childName, age, interventionDuration, birthDate) {
         buildProfileDisplayInfo(
             childName = childName,
             age = age,
-            interventionDuration = interventionDuration
+            interventionDuration = interventionDuration,
+            birthDate = birthDate
         )
     }
 
@@ -53,14 +56,6 @@ fun ChildInfoProfileCard(
         elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
     ) {
         Box(modifier = Modifier.fillMaxWidth()) {
-            Image(
-                painter = painterResource(id = ChildProfileAssets.decorLeftStar),
-                contentDescription = null,
-                modifier = Modifier
-                    .size(20.dp)
-                    .align(Alignment.TopStart)
-                    .offset(x = 10.dp, y = (-10).dp)
-            )
             Image(
                 painter = painterResource(id = ChildProfileAssets.decorRightStar),
                 contentDescription = null,
@@ -78,7 +73,7 @@ fun ChildInfoProfileCard(
                 verticalAlignment = Alignment.Top
             ) {
                 Image(
-                    painter = painterResource(id = ChildProfileAssets.profilePhoto),
+                    painter = painterResource(id = AvatarPresets.childDrawableRes(avatarKey)),
                     contentDescription = "儿童头像",
                     modifier = Modifier
                         .size(width = 104.dp, height = 136.dp)
@@ -122,7 +117,5 @@ private fun ChildInfoLine(
 }
 
 private object ChildProfileAssets {
-    val profilePhoto = R.drawable.report_ref_a21e3f22c0330add844d0bbc5855d710
-    val decorLeftStar = R.drawable.report_ref_755f917ee7c2d0ea710d17e80388515e
     val decorRightStar = R.drawable.report_ref_928735bc81fe83f919803074a6ac915c
 }

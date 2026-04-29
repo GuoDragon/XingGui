@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import com.example.xinggui.R
 import com.example.xinggui.data.repository.AppRepository
 import com.example.xinggui.data.repository.DataRepository
+import com.example.xinggui.presentation.common.PrivacyNoticeDialog
 import com.example.xinggui.ui.components.DecorativeStarsOverlay
 import com.example.xinggui.ui.components.IosGroupCard
 import com.example.xinggui.ui.components.IosPrimaryButton
@@ -47,6 +48,7 @@ fun LoginScreen(
     var password by remember { mutableStateOf("") }
     var errorMessage by remember { mutableStateOf<String?>(null) }
     var isSubmitting by remember { mutableStateOf(false) }
+    var showPrivacy by remember { mutableStateOf(false) }
     val view = remember {
         object : LoginContract.View {
             override fun showSubmitting(submitting: Boolean) {
@@ -107,12 +109,30 @@ fun LoginScreen(
                         visualTransformation = PasswordVisualTransformation()
                     )
                     errorMessage?.let {
+                        val backendUnavailable = it.contains("无法连接本地服务")
                         Text(
                             text = it,
                             color = IosRed,
                             style = MaterialTheme.typography.bodySmall,
                             modifier = Modifier.padding(horizontal = 4.dp)
                         )
+                        if (backendUnavailable) {
+                            Text(
+                                text = "排查：确认电脑端已运行 启动后端.bat，后端地址与 app_config.json 一致，然后点重试。",
+                                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                style = MaterialTheme.typography.bodySmall,
+                                modifier = Modifier.padding(horizontal = 4.dp)
+                            )
+                            IosTextButton(
+                                text = "重试连接",
+                                onClick = {
+                                    scope.launch {
+                                        presenter.onLoginClicked(account, password)
+                                    }
+                                },
+                                enabled = !isSubmitting
+                            )
+                        }
                     }
                     IosPrimaryButton(
                         text = if (isSubmitting) stringResource(R.string.loading) else stringResource(R.string.action_login),
@@ -129,6 +149,11 @@ fun LoginScreen(
                         onClick = presenter::onRegisterClicked,
                         enabled = !isSubmitting
                     )
+                    IosTextButton(
+                        text = "隐私与儿童数据说明",
+                        onClick = { showPrivacy = true },
+                        enabled = !isSubmitting
+                    )
                 }
             }
         }
@@ -137,5 +162,8 @@ fun LoginScreen(
             modifier = Modifier.fillMaxSize(),
             pageKey = "login_screen"
         )
+        if (showPrivacy) {
+            PrivacyNoticeDialog(onDismiss = { showPrivacy = false })
+        }
     }
 }

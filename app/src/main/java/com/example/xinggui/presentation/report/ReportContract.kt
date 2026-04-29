@@ -20,6 +20,8 @@ data class ReportUiState(
     val childName: String,
     val age: Int,
     val interventionDuration: String,
+    val childBirthDate: String? = null,
+    val childAvatarKey: String? = null,
     val role: UserRole,
     val dimensions: List<DimensionScoreUiModel>,
     val overview: String,

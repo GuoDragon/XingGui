@@ -33,7 +33,6 @@ fun RadarChart(
         val center = Offset(size.width / 2f, size.height / 2f)
         val outerRadius = minOf(size.width, size.height) * 0.32f
         val outlineColor = StarTextSecondary.copy(alpha = 0.35f)
-        val axisColor = StarTextSecondary.copy(alpha = 0.24f)
         val labelTitleColor = StarTextPrimary.toArgb()
         val labelScoreColor = StarTextSecondary.toArgb()
 
@@ -46,17 +45,6 @@ fun RadarChart(
             close()
         }
         drawPath(path = outerPath, color = outlineColor, style = Stroke(width = 1.1.dp.toPx()))
-
-        safeDimensions.forEachIndexed { index, _ ->
-            val angle = axisAngle(index, safeDimensions.size)
-            val end = radialPoint(center, outerRadius, angle)
-            drawLine(
-                color = axisColor,
-                start = center,
-                end = end,
-                strokeWidth = 1.1.dp.toPx()
-            )
-        }
 
         val points = safeDimensions.mapIndexed { index, item ->
             val angle = axisAngle(index, safeDimensions.size)
@@ -119,11 +107,6 @@ internal fun renderRadarChartBitmap(
         strokeWidth = 1.1f * density
         color = StarTextSecondary.copy(alpha = 0.35f).toArgb()
     }
-    val axisPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        style = Paint.Style.STROKE
-        strokeWidth = 1.1f * density
-        color = StarTextSecondary.copy(alpha = 0.24f).toArgb()
-    }
     val fillPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         style = Paint.Style.FILL
         color = StarBlue.copy(alpha = 0.18f).toArgb()
@@ -162,12 +145,6 @@ internal fun renderRadarChartBitmap(
         close()
     }
     canvas.drawPath(outerPath, outerOutlinePaint)
-
-    safeDimensions.forEachIndexed { index, _ ->
-        val angle = axisAngle(index, safeDimensions.size)
-        val end = radialPoint(center, outerRadius, angle)
-        canvas.drawLine(center.x, center.y, end.x, end.y, axisPaint)
-    }
 
     val points = safeDimensions.mapIndexed { index, item ->
         val angle = axisAngle(index, safeDimensions.size)
