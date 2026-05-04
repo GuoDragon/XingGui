@@ -1,4 +1,4 @@
-﻿package com.example.xinggui.presentation.resources
+package com.example.xinggui.presentation.resources
 
 import com.example.xinggui.data.model.ResourceRuntimeState
 import com.example.xinggui.data.model.UserRole

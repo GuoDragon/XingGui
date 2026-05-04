@@ -1,4 +1,4 @@
-﻿package com.example.xinggui.presentation.report
+package com.example.xinggui.presentation.report
 
 import com.example.xinggui.data.model.ReportDataSource
 import com.example.xinggui.data.model.UserRole

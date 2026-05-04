@@ -4,6 +4,8 @@ import com.example.xinggui.data.model.GoalPlan
 import com.example.xinggui.data.model.IepDocument
 import com.example.xinggui.data.model.IepWeeklyGoalInput
 import com.example.xinggui.data.model.UserRole
+import com.example.xinggui.data.model.displayAge
+import com.example.xinggui.data.model.displayInterventionDuration
 import com.example.xinggui.data.repository.AppRepository
 import com.example.xinggui.presentation.common.ScreenRenderState
 
@@ -92,6 +94,10 @@ class GoalsPresenter(
         val iepDocument = latestIepDocument ?: repository.getLatestIepDocument(childId)
         return GoalsUiState(
             childName = child.name,
+            childAge = child.displayAge(),
+            childInterventionDuration = child.displayInterventionDuration(),
+            childBirthDate = child.birthDate,
+            childAvatarKey = child.avatarKey,
             role = role,
             semesterGoal = goal.semesterGoal,
             monthlyGoal = goal.monthlyGoal,

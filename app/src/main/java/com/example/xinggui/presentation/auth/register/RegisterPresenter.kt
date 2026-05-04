@@ -1,4 +1,4 @@
-﻿package com.example.xinggui.presentation.auth.register
+package com.example.xinggui.presentation.auth.register
 
 import com.example.xinggui.data.model.UserRole
 import com.example.xinggui.data.repository.AppRepository

@@ -1,4 +1,4 @@
-﻿package com.example.xinggui.presentation.report
+package com.example.xinggui.presentation.report
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize

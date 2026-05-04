@@ -1,4 +1,4 @@
-﻿package com.example.xinggui.data.model
+package com.example.xinggui.data.model
 
 enum class GrowthDimension(val id: String, val displayName: String) {
     COGNITION("cognition", "认知"),

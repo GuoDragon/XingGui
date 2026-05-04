@@ -1,4 +1,4 @@
-﻿package com.example.xinggui.presentation.archive
+package com.example.xinggui.presentation.archive
 
 import com.example.xinggui.data.model.UserRole
 import com.example.xinggui.presentation.common.ScreenRenderState

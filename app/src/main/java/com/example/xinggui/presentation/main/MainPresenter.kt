@@ -1,4 +1,4 @@
-﻿package com.example.xinggui.presentation.main
+package com.example.xinggui.presentation.main
 
 import com.example.xinggui.data.repository.AppRepository
 import com.example.xinggui.presentation.common.ScreenRenderState

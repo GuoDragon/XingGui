@@ -1,4 +1,4 @@
-﻿package com.example.xinggui.presentation.auth.register
+package com.example.xinggui.presentation.auth.register
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box

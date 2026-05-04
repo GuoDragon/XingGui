@@ -19,6 +19,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.ChildCare
+import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.Lock
@@ -30,7 +31,12 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -41,12 +47,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Dialog
+import com.example.xinggui.data.model.ChildProfile
 import com.example.xinggui.data.model.UserRole
 import com.example.xinggui.data.model.displayAge
 import com.example.xinggui.data.model.displayInterventionDuration
 import com.example.xinggui.presentation.common.AvatarPresets
 import com.example.xinggui.presentation.common.ChildInfoProfileCard
 import com.example.xinggui.ui.theme.IosBlueSoft
+import com.example.xinggui.ui.theme.IosCard
+import com.example.xinggui.ui.theme.IosCardMuted
 import com.example.xinggui.ui.theme.IosGroupedBackground
 import com.example.xinggui.ui.theme.IosRed
 import com.example.xinggui.ui.theme.IosSeparator
@@ -65,6 +75,8 @@ private val ProfileDanger = IosRed
 @Composable
 fun ProfileScreen(
     state: MainShellUiState,
+    availableChildren: List<ChildProfile>,
+    onChildSelected: (String) -> Unit,
     onEditAccountClick: () -> Unit,
     onEditChildClick: () -> Unit,
     onPrivacyClick: () -> Unit,
@@ -72,6 +84,7 @@ fun ProfileScreen(
     onLogoutClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    var showChildSelectorDialog by remember { mutableStateOf(false) }
     LazyColumn(
         modifier = modifier
             .fillMaxSize()
@@ -92,7 +105,10 @@ fun ProfileScreen(
             AccountSummaryCard(state = state)
         }
         item {
-            CurrentChildSection(state = state)
+            CurrentChildSection(
+                state = state,
+                onShowChildSelector = { showChildSelectorDialog = true }
+            )
         }
         item {
             ProfileEditActionGroup(
@@ -108,6 +124,13 @@ fun ProfileScreen(
                 onLogoutClick = onLogoutClick
             )
         }
+    }
+    if (showChildSelectorDialog) {
+        ChildSelectorDialog(
+            state = state,
+            onChildSelected = onChildSelected,
+            onDismiss = { showChildSelectorDialog = false }
+        )
     }
 }
 
@@ -214,11 +237,19 @@ private fun CurrentRolePill(roleLabel: String) {
 }
 
 @Composable
-private fun CurrentChildSection(state: MainShellUiState) {
+private fun CurrentChildSection(
+    state: MainShellUiState,
+    onShowChildSelector: () -> Unit
+) {
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
         SectionHeader(
             title = "儿童信息",
-            trailing = state.linkedChildrenBadge()
+            trailing = state.linkedChildrenBadge(),
+            onTrailingClick = if (state.currentRole == UserRole.TEACHER && state.availableChildren.size > 1) {
+                onShowChildSelector
+            } else {
+                null
+            }
         )
         val child = state.currentChild
         if (child == null) {
@@ -387,7 +418,8 @@ private fun SettingsActionRow(
 @Composable
 private fun SectionHeader(
     title: String,
-    trailing: String? = null
+    trailing: String? = null,
+    onTrailingClick: (() -> Unit)? = null
 ) {
     Row(
         modifier = Modifier
@@ -405,14 +437,15 @@ private fun SectionHeader(
         if (trailing != null) {
             Surface(
                 shape = RoundedCornerShape(999.dp),
-                color = Color.White.copy(alpha = 0.72f),
-                border = BorderStroke(1.dp, ProfileCardBorder)
+                color = if (onTrailingClick != null) IosBlueSoft else Color.White.copy(alpha = 0.72f),
+                border = BorderStroke(1.dp, ProfileCardBorder),
+                modifier = if (onTrailingClick != null) Modifier.clickable(onClick = onTrailingClick) else Modifier
             ) {
                 Text(
                     text = trailing,
                     modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp),
                     style = MaterialTheme.typography.labelMedium,
-                    color = StarTextSecondary,
+                    color = if (onTrailingClick != null) StarBlue else StarTextSecondary,
                     fontWeight = FontWeight.Medium
                 )
             }
@@ -528,3 +561,112 @@ private fun MainShellUiState.linkedChildrenBadge(): String? {
 }
 
 private fun String?.displayOrPlaceholder(): String = if (isNullOrBlank()) "未填写" else this
+
+@Composable
+fun ChildSelectorDialog(
+    state: MainShellUiState,
+    onChildSelected: (String) -> Unit,
+    onDismiss: () -> Unit
+) {
+    Dialog(onDismissRequest = onDismiss) {
+        Card(
+            modifier = Modifier.fillMaxWidth(0.9f),
+            shape = RoundedCornerShape(24.dp),
+            colors = CardDefaults.cardColors(containerColor = IosCard)
+        ) {
+            Column(
+                modifier = Modifier.padding(16.dp),
+                verticalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                Text(
+                    text = "选择儿童",
+                    style = MaterialTheme.typography.titleLarge,
+                    fontWeight = FontWeight.Bold,
+                    color = StarTextPrimary
+                )
+                state.availableChildren.forEach { child ->
+                    val isSelected = state.currentChild?.childId == child.childId
+                    ChildSelectionItem(
+                        child = child,
+                        isSelected = isSelected,
+                        onClick = {
+                            onChildSelected(child.childId)
+                            onDismiss()
+                        }
+                    )
+                }
+                TextButton(
+                    onClick = onDismiss,
+                    modifier = Modifier.align(Alignment.End)
+                ) {
+                    Text("取消")
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun ChildSelectionItem(
+    child: ChildProfile,
+    isSelected: Boolean,
+    onClick: () -> Unit
+) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable(onClick = onClick),
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = if (isSelected) IosBlueSoft else IosCardMuted
+        ),
+        border = if (isSelected) BorderStroke(1.dp, StarBlue) else null
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            Box(
+                modifier = Modifier
+                    .size(48.dp)
+                    .clip(CircleShape)
+                    .background(IosBlueSoft),
+                contentAlignment = Alignment.Center
+            ) {
+                Image(
+                    painter = painterResource(id = AvatarPresets.childDrawableRes(child.avatarKey)),
+                    contentDescription = null,
+                    modifier = Modifier.fillMaxSize(),
+                    contentScale = ContentScale.Crop
+                )
+            }
+            Column(
+                modifier = Modifier.weight(1f),
+                verticalArrangement = Arrangement.spacedBy(4.dp)
+            ) {
+                Text(
+                    text = child.name,
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.Bold,
+                    color = StarTextPrimary
+                )
+                Text(
+                    text = "${child.displayAge()}岁 · ${child.displayInterventionDuration()}",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = StarTextSecondary
+                )
+            }
+            if (isSelected) {
+                Icon(
+                    imageVector = Icons.Default.CheckCircle,
+                    contentDescription = null,
+                    tint = StarBlue,
+                    modifier = Modifier.size(28.dp)
+                )
+            }
+        }
+    }
+}

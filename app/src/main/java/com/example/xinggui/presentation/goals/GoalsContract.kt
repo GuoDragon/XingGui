@@ -14,6 +14,10 @@ data class GoalTaskUiModel(
 
 data class GoalsUiState(
     val childName: String,
+    val childAge: Int,
+    val childInterventionDuration: String,
+    val childBirthDate: String? = null,
+    val childAvatarKey: String? = null,
     val role: UserRole,
     val semesterGoal: String,
     val monthlyGoal: String,

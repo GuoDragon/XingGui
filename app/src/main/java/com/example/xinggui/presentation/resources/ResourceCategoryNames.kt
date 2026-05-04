@@ -1,4 +1,4 @@
-﻿package com.example.xinggui.presentation.resources
+package com.example.xinggui.presentation.resources
 
 object ResourceCategoryNames {
     const val NEWS_POLICY = "资讯政策"

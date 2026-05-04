@@ -95,6 +95,12 @@ fun ResourcesHomePage(
             .fillMaxSize()
             .background(ResourceBackground)
     ) {
+        Box(
+            modifier = androidx.compose.ui.Modifier.padding(start = 16.dp, end = 16.dp, top = 16.dp)
+        ) {
+            ResourceHeaderCard(title = "星资源")
+        }
+
         // 搜索栏和分类筛选合并到一个卡片
         SearchAndFilterCard(
             keyword = searchKeyword,

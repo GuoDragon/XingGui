@@ -69,6 +69,7 @@ import com.example.xinggui.data.model.IepWeeklyGoalInput
 import com.example.xinggui.data.model.UserRole
 import com.example.xinggui.data.repository.AppRepository
 import com.example.xinggui.data.repository.DataRepository
+import com.example.xinggui.presentation.common.ChildInfoProfileCard
 import com.example.xinggui.presentation.common.ScreenRenderState
 import com.example.xinggui.ui.components.DecorativeStarsOverlay
 import com.example.xinggui.ui.components.IosStateView
@@ -188,6 +189,15 @@ fun GoalsScreen(
                     verticalArrangement = Arrangement.spacedBy(14.dp)
                 ) {
                     GoalsTitleHeader()
+
+                    ChildInfoProfileCard(
+                        childName = state.childName,
+                        age = state.childAge,
+                        interventionDuration = state.childInterventionDuration,
+                        birthDate = state.childBirthDate,
+                        avatarKey = state.childAvatarKey
+                    )
+
                     SectionCard(title = "个别化教育计划长期目标", subtitle = state.semesterGoal) {
                         Text(text = state.monthlyGoal, style = MaterialTheme.typography.bodyMedium)
                     }

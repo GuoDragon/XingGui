@@ -1,4 +1,4 @@
-﻿package com.example.xinggui.presentation.auth.login
+package com.example.xinggui.presentation.auth.login
 
 import com.example.xinggui.data.repository.AppRepository
 

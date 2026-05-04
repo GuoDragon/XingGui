@@ -1,4 +1,4 @@
-﻿package com.example.xinggui.data.model
+package com.example.xinggui.data.model
 
 enum class UserRole(val storageValue: String, val displayName: String) {
     PARENT("PARENT", "家长"),

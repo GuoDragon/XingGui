@@ -1,4 +1,4 @@
-﻿package com.example.xinggui.presentation.archive.components
+package com.example.xinggui.presentation.archive.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

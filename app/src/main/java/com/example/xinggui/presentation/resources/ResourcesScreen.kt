@@ -1,4 +1,4 @@
-﻿package com.example.xinggui.presentation.resources
+package com.example.xinggui.presentation.resources
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.Box
@@ -42,7 +42,6 @@ private enum class UnlockAction {
 
 @Composable
 fun ResourcesScreen(
-    selectedChildId: String,
     currentRole: UserRole,
     modifier: Modifier = Modifier,
     repository: AppRepository = DataRepository,
@@ -95,7 +94,7 @@ fun ResourcesScreen(
     }
 
     LaunchedEffect(Unit) { presenter.attachView(view) }
-    LaunchedEffect(selectedChildId, currentRole) { presenter.loadData(currentRole) }
+    LaunchedEffect(currentRole) { presenter.loadData(currentRole) }
     DisposableEffect(Unit) { onDispose { presenter.detachView() } }
 
     IosStateView(

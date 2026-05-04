@@ -1,4 +1,4 @@
-﻿package com.example.xinggui.presentation.main
+package com.example.xinggui.presentation.main
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.BorderStroke
@@ -190,7 +190,6 @@ fun MainScreen(
                 }
                 composable(AppRoute.MainResources.route) {
                     ResourcesScreen(
-                        selectedChildId = state.currentChild?.childId.orEmpty(),
                         currentRole = state.currentRole,
                         repository = repository
                     )
@@ -198,6 +197,10 @@ fun MainScreen(
                 composable(AppRoute.MainProfile.route) {
                     ProfileScreen(
                         state = state,
+                        availableChildren = state.availableChildren,
+                        onChildSelected = { childId ->
+                            scope.launch { presenter.onChildSelected(childId) }
+                        },
                         onEditAccountClick = { editingAccount = true },
                         onEditChildClick = {
                             if (state.currentChild != null) {

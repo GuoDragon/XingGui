@@ -1,4 +1,4 @@
-﻿package com.example.xinggui.presentation.report.components
+package com.example.xinggui.presentation.report.components
 
 import android.content.Context
 import android.graphics.Bitmap

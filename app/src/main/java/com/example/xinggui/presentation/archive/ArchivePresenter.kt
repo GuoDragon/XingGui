@@ -1,4 +1,4 @@
-﻿package com.example.xinggui.presentation.archive
+package com.example.xinggui.presentation.archive
 
 import com.example.xinggui.data.model.GrowthDimension
 import com.example.xinggui.data.model.UserRole
