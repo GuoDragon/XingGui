@@ -94,6 +94,7 @@ class GoalsPresenter(
         val iepDocument = latestIepDocument ?: repository.getLatestIepDocument(childId)
         return GoalsUiState(
             childName = child.name,
+            // AI辅助生成：Doubao-Seed-2.0-Code, 2026-05-02
             childAge = child.displayAge(),
             childInterventionDuration = child.displayInterventionDuration(),
             childBirthDate = child.birthDate,

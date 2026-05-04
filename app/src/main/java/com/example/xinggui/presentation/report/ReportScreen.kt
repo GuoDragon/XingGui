@@ -25,6 +25,7 @@ import com.example.xinggui.ui.components.IosStateView
 import kotlinx.coroutines.launch
 
 @Composable
+// AI辅助生成：Doubao-Seed-2.0-Code, 2026-05-02
 fun ReportScreen(
     selectedChildId: String,
     currentRole: UserRole,

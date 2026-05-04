@@ -189,6 +189,7 @@ fun MainScreen(
                     )
                 }
                 composable(AppRoute.MainResources.route) {
+                    // AI辅助生成：Doubao-Seed-2.0-Code, 2026-05-02
                     ResourcesScreen(
                         currentRole = state.currentRole,
                         repository = repository

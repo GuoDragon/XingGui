@@ -60,6 +60,7 @@ import com.example.xinggui.ui.theme.StarTextPrimary
 import com.example.xinggui.ui.theme.StarTextSecondary
 
 @Composable
+// AI辅助生成：Doubao-Seed-2.0-Code, 2026-05-02
 fun ReportReferencePage(
     state: ReportUiState,
     onShare: () -> Unit,

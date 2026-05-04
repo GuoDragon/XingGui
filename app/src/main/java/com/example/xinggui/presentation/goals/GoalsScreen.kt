@@ -96,6 +96,7 @@ private val IepMimeTypes = arrayOf(
 )
 
 @Composable
+// AI辅助生成：Doubao-Seed-2.0-Code, 2026-05-02
 fun GoalsScreen(
     selectedChildId: String,
     currentRole: UserRole,

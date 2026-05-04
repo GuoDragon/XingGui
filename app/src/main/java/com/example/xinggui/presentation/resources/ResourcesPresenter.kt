@@ -18,6 +18,7 @@ class ResourcesPresenter(
         view = null
     }
 
+    // AI辅助生成：Doubao-Seed-2.0-Code, 2026-05-02
     override suspend fun loadData(role: UserRole) {
         view?.render(ScreenRenderState.Loading)
         runCatching {

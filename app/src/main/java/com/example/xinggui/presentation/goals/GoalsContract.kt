@@ -14,6 +14,7 @@ data class GoalTaskUiModel(
 
 data class GoalsUiState(
     val childName: String,
+    // AI辅助生成：Doubao-Seed-2.0-Code, 2026-05-02
     val childAge: Int,
     val childInterventionDuration: String,
     val childBirthDate: String? = null,

@@ -41,6 +41,7 @@ private enum class UnlockAction {
 }
 
 @Composable
+// AI辅助生成：Doubao-Seed-2.0-Code, 2026-05-02
 fun ResourcesScreen(
     currentRole: UserRole,
     modifier: Modifier = Modifier,

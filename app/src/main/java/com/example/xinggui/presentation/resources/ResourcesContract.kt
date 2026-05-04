@@ -48,6 +48,7 @@ interface ResourcesContract {
     interface Presenter {
         fun attachView(view: View)
         fun detachView()
+        // AI辅助生成：Doubao-Seed-2.0-Code, 2026-05-02
         suspend fun loadData(role: UserRole)
         fun search(items: List<ResourceCardUiModel>, keyword: String): List<ResourceCardUiModel>
         suspend fun saveRuntimeState(unlockedResourceIds: Set<String>, searchHistory: List<String>)
